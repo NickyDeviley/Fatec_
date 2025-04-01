@@ -1,0 +1,40 @@
+<%-- any content can be specified here e.g.: --%>
+<%@ page pageEncoding="UTF-8" %>
+<%@ page import="java.io.*"%>
+<h2>Juro Simples!</h2>
+
+<form action="" method="POST">
+    <h3>Capital Inicial:</h3>
+    <input type="number" name="Capital_Inicial" required> <br>
+    <h3>Taxa de Juro (Em decimal):</h3>
+    <input type="number" name="Taxa_de_Juros" required> <br>
+    <h3>Tempo (Em meses):</h3>
+    <input type="number" name="Tempo" required> <br><br>
+    <button type="submit">Enviar</button>
+</form>
+
+<%
+
+    String cap_inicial = request.getParameter("Capital_Inicial");
+    String Taxa_ju = request.getParameter("Taxa_de_Juros");
+    String tempo = request.getParameter("Tempo");
+    
+    if (cap_inicial != null && Taxa_ju != null && tempo != null) {
+        try {
+            double _cap_inicial = Double.parseDouble(cap_inicial);
+            double _Taxa_ju = Double.parseDouble(Taxa_ju);
+            double _tempo = Double.parseDouble(tempo);
+            
+            double _Juros = _cap_inicial * _Taxa_ju * _tempo;
+            double _mont_total = _cap_inicial + _Juros;
+            
+            out.println(_Juros);
+            out.println(_mont_total);
+        }
+        catch (NumberFormatException e) {
+            out.println("<p style='color: red;'> Erro: Os campos estão vazios.</p>");
+        }
+    }
+%>
+
+
